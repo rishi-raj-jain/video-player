@@ -20,7 +20,7 @@ export async function generateMetadata({}): Promise<Metadata> {
   if (url?.endsWith('/')) {
     url = url.substring(0, url.length - 1)
   }
-  const path = headersList.get('x-invoke-path')
+  const path = headersList.get('next-url')
   if (path) url += path
   return {
     title: 'Home',
