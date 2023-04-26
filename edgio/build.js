@@ -22,4 +22,5 @@ module.exports = async function build() {
   )
   builder.buildServiceWorker(join(process.cwd(), 'sw', 'service-worker.ts'), join(process.cwd(), '.edgio', 'temp', 'service-worker.js'), false)
   await builder.build()
+  builder.removeSync(join(builder.jsDir, 'dist', 'public'))
 }
