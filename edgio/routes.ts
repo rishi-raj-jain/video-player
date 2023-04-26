@@ -9,7 +9,7 @@ if (isProductionBuild()) {
   try {
     const publicDir = readFileSync(join(process.cwd(), 'public_routes'), 'utf8')
     publicDir.split(',').forEach((i) => {
-      router.match('/' + i, ({ serveStatic }) => {
+      router.match(`/${i}`, ({ serveStatic }) => {
         serveStatic(`public/${i}`)
       })
     })
