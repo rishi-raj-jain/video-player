@@ -99,7 +99,32 @@ router.get('/_next/image', ({ cache, renderWithApp, removeUpstreamResponseHeader
 })
 
 if (isProductionBuild()) {
-  const dynamicPaths = ['/', '/show/:id', '/play/:id']
+  router.match({ path: '/show/:id', headers: { 'Next-Router-State-Tree': null } }, ({ cache, redirect }) => {
+    cache({
+      edge: {
+        maxAgeSeconds: 60 * 60 * 24 * 365,
+      },
+    })
+    redirect('/?callbackUrl=/show/:id', 301)
+  })
+
+  router.match({ path: '/show/:id', headers: { 'Next-Router-State-Tree': /.*/ } }, ({ cache, renderWithApp, removeUpstreamResponseHeader }) => {
+    removeUpstreamResponseHeader('set-cookie')
+    removeUpstreamResponseHeader('cache-control')
+    cache({
+      browser: false,
+      edge: {
+        maxAgeSeconds: 60,
+        staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
+      },
+      key: new CustomCacheKey().addHeader('Next-Router-State-Tree'),
+    })
+    renderWithApp()
+  })
+}
+
+if (isProductionBuild()) {
+  const dynamicPaths = ['/', '/play/:id']
 
   dynamicPaths.forEach((i) => {
     router.match({ path: i, headers: { 'Next-Router-State-Tree': null } }, ({ cache, renderWithApp, removeUpstreamResponseHeader }) => {
@@ -111,7 +136,7 @@ if (isProductionBuild()) {
           maxAgeSeconds: 60,
           staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
         },
-        key: new CustomCacheKey().addHeader('Next-Router-State-Tree'),
+        key: new CustomCacheKey().addHeader('Next-Router-State-Tree').excludeQueryParameters('callbackUrl'),
       })
       renderWithApp()
     })

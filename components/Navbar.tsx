@@ -3,14 +3,21 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
-import { usePathname, useRouter } from 'next/navigation'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const Navbar = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const { data: session } = useSession()
   const [status, setStatus] = useState(false)
+  useEffect(() => {
+    const callbackUrl = searchParams?.get('callbackUrl')
+    if (callbackUrl) {
+      router.replace(callbackUrl)
+    }
+  }, [searchParams])
   useEffect(() => {
     fetch('/api/session', {
       method: 'POST',
