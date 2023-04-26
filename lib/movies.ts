@@ -33,14 +33,14 @@ export const fetchMovieDataConfig = [
   {
     id: 1,
     url: fetchTopRated,
-    title: 'Top Rated on Fakeflix',
+    title: 'Top Rated on FastFlix',
     genre: 'toprated',
   },
   {
     id: 2,
     url: fetchNetflixOriginals,
-    title: 'Fakeflix Originals',
-    genre: 'fakeflix',
+    title: 'FastFlix Originals',
+    genre: 'FastFlix',
     isLarge: true,
   },
   {
@@ -97,8 +97,8 @@ export const fetchSeriesDataConfig = [
   {
     id: 1,
     url: fetchNetflixOriginals,
-    title: 'Fakeflix Originals',
-    genre: 'fakeflix',
+    title: 'FastFlix Originals',
+    genre: 'FastFlix',
     isLarge: true,
   },
   {
@@ -161,7 +161,7 @@ export const fetchPopularDataConfig = [
   {
     id: 1,
     url: fetchReleasedMoviesByOneMonth,
-    title: 'New on Fakeflix',
+    title: 'New on FastFlix',
     genre: 'newin',
   },
   {
