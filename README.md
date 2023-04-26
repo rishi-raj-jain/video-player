@@ -34,6 +34,8 @@ You can deploy your own hosted version of the OTT-like experience using the butt
 
 ## Tech Stack + Features
 
+https://user-images.githubusercontent.com/46300090/234580910-e94b4cd4-0dd2-4420-ab14-30e6ca733439.mp4
+
 ### Frameworks
 
 - [Next 13](https://nextjs.org) - Framework of choice by default
