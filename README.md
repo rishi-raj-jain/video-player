@@ -1,15 +1,3 @@
-<p align="center">
-  <a href="https://twitter.com/rishi_raj_jain_">
-    <img src="https://img.shields.io/twitter/follow/rishi_raj_jain_?style=flat&label=%40rishi_raj_jain_&logo=twitter&color=0bf&logoColor=fff" alt="Twitter" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="#introduction"><strong>Introduction</strong></a> ·
-  <a href="#tech-stack"><strong>Tech Stack</strong></a>
-</p>
-<br/>
-
 ## Introduction
 
 Built with [Next 13](https://nextjs.org), [Edgio](https://edg.io), [TVmaze](https://www.tvmaze.com) and [TailwindCSS](https://tailwindcss.com).
