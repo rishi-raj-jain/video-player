@@ -3,13 +3,12 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
+import { usePathname, useRouter } from 'next/navigation'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const Navbar = () => {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
   const { data: session } = useSession()
   const [status, setStatus] = useState(false)
   useEffect(() => {
@@ -35,11 +34,7 @@ const Navbar = () => {
         }
       }
     }
-    const callbackUrl = searchParams?.get('callbackUrl')
-    if (callbackUrl?.length) {
-      router.push(callbackUrl)
-    }
-  }, [status, session, pathname, searchParams])
+  }, [status, session, pathname])
   return (
     <div className="w-full mt-5 flex flex-row items-center justify-between">
       <Link className="flex flex-row gap-x-2 ml-5 md:ml-10 items-center" href="/">

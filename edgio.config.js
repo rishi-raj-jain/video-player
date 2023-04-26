@@ -7,11 +7,6 @@ module.exports = {
       domainOrIp: 'api.tvmaze.com',
       disableCheckCert: true,
     },
-    image: {
-      hostHeader: 'opt.moovweb.net',
-      domainOrIp: 'opt.moovweb.net',
-      disableCheckCert: true,
-    },
     api_themoviedb: {
       hostHeader: 'api.themoviedb.org',
       domainOrIp: 'api.themoviedb.org',

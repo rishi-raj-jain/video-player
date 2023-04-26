@@ -90,18 +90,26 @@ export default function Product({ params }: ShowModalProps) {
                   <span className="font-medium text-lg">Play</span>
                 </Link>
               </div>
-              {show?.image?.medium && (
+              {show?.image?.medium ? (
                 <img
                   alt={show.name}
                   className="object-cover object-center w-full h-[50vh] rounded-t"
                   src={`https://opt.moovweb.net?quality=30&img=https://image.tmdb.org/t/p/original${show.image.medium}`}
                 />
+              ) : (
+                <img alt={'Fallback Image'} src={fallbackImage} className="object-cover object-center w-full h-[50vh] rounded-t" />
               )}
             </div>
             <div className="w-full flex flex-row p-5">
               <div className="w-3/5 pr-10 flex flex-col">
-                {show?.summary && (
+                {show?.summary ? (
                   <p className="text-base font-light text-white leading-6 line-clamp-3" dangerouslySetInnerHTML={{ __html: show.summary }} />
+                ) : (
+                  <div className="w-full flex flex-col">
+                    <p className="h-[10px] w-full bg-white animate-pulse"></p>
+                    <p className="h-[10px] mt-3 w-full bg-white animate-pulse"></p>
+                    <p className="h-[10px] mt-3 w-full bg-white animate-pulse"></p>
+                  </div>
                 )}
               </div>
               <div className="w-2/5 flex flex-col">

@@ -74,18 +74,6 @@ router.get('/l0-themoviedb-api/:path*', ({ proxy, cache, removeUpstreamResponseH
   })
 })
 
-router.get('/l0-opt', ({ proxy, cache, removeUpstreamResponseHeader }) => {
-  removeUpstreamResponseHeader('set-cookie')
-  removeUpstreamResponseHeader('cache-control')
-  cache({
-    edge: {
-      maxAgeSeconds: 60 * 60 * 24 * 365,
-    },
-    browser: false,
-  })
-  proxy('image', { path: '/' })
-})
-
 router.get('/_next/image', ({ cache, renderWithApp, removeUpstreamResponseHeader }) => {
   removeUpstreamResponseHeader('set-cookie')
   removeUpstreamResponseHeader('cache-control')
@@ -99,32 +87,7 @@ router.get('/_next/image', ({ cache, renderWithApp, removeUpstreamResponseHeader
 })
 
 if (isProductionBuild()) {
-  router.match({ path: '/show/:id', headers: { 'Next-Router-State-Tree': null } }, ({ cache, redirect }) => {
-    cache({
-      edge: {
-        maxAgeSeconds: 60 * 60 * 24 * 365,
-      },
-    })
-    redirect('/?callbackUrl=/show/:id', 301)
-  })
-
-  router.match({ path: '/show/:id', headers: { 'Next-Router-State-Tree': /.*/ } }, ({ cache, renderWithApp, removeUpstreamResponseHeader }) => {
-    removeUpstreamResponseHeader('set-cookie')
-    removeUpstreamResponseHeader('cache-control')
-    cache({
-      browser: false,
-      edge: {
-        maxAgeSeconds: 60,
-        staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
-      },
-      key: new CustomCacheKey().addHeader('Next-Router-State-Tree'),
-    })
-    renderWithApp()
-  })
-}
-
-if (isProductionBuild()) {
-  const dynamicPaths = ['/', '/play/:id']
+  const dynamicPaths = ['/', '/show/:id', '/play/:id']
 
   dynamicPaths.forEach((i) => {
     router.match({ path: i, headers: { 'Next-Router-State-Tree': null } }, ({ cache, renderWithApp, removeUpstreamResponseHeader }) => {
@@ -133,10 +96,10 @@ if (isProductionBuild()) {
       cache({
         browser: false,
         edge: {
-          maxAgeSeconds: 60,
+          maxAgeSeconds: 60 * 60,
           staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
         },
-        key: new CustomCacheKey().addHeader('Next-Router-State-Tree').excludeQueryParameters('callbackUrl'),
+        key: new CustomCacheKey().addHeader('Next-Router-State-Tree'),
       })
       renderWithApp()
     })
@@ -147,7 +110,7 @@ if (isProductionBuild()) {
       cache({
         browser: false,
         edge: {
-          maxAgeSeconds: 60,
+          maxAgeSeconds: 60 * 60,
           staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
         },
         key: new CustomCacheKey().addHeader('Next-Router-State-Tree'),
