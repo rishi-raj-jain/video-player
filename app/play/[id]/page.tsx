@@ -11,7 +11,7 @@ export const revalidate = 0
 
 async function getData(id: string | number) {
   const headersList = headers()
-  const fetchCall = await fetch(`${GET_ORIGIN(headersList.get('host'))}/l0-api/shows/${id}`)
+  const fetchCall = await fetch(`${GET_ORIGIN(headersList.get('host'))}/l0-themoviedb-api/movie/${id}`)
   if (fetchCall.ok) {
     const data = await fetchCall.json()
     return data

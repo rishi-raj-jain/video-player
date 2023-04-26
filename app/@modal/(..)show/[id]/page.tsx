@@ -2,18 +2,20 @@
 
 'use client'
 
+const fallbackImage =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAACmCAMAAADAp3D7AAAAA1BMVEWAgICQdD0xAAAAK0lEQVR4nO3BMQEAAADCoPVP7W8GoAAAAAAAAAAAAAAAAAAAAAAAAAAAeANRtAABpXaWUQAAAABJRU5ErkJggg=='
+
 class ShowProps {
   name?: string
   image?: { medium?: string }
   summary?: string
   genres?: string[]
-  officialSite?: string
   language?: string
   network?: { name?: string }
 }
 
 class CastProps {
-  person?: { name?: string; url?: string }
+  name?: string
 }
 
 class ShowModalProps {
@@ -37,21 +39,30 @@ export default function Product({ params }: ShowModalProps) {
   const [cast, setCast] = useState<CastProps[]>([])
   useEffect(() => {
     if (params.id) {
-      fetch(`/l0-api/shows/${params.id}`)
+      fetch(`/l0-themoviedb-api/movie/${params.id}`)
         .then((res) => res.json())
         .then((res) => {
           try {
             console.log(res)
-            setShow(res)
+            const showObject: ShowProps = {
+              name: res?.original_title ?? res?.title ?? 'Placeholder',
+              image: { medium: res?.poster_path ?? fallbackImage },
+              summary: res?.overview ?? '',
+              genres: res?.genres?.map((i: { name: string }) => i.name),
+              language: res?.original_language ?? res?.spoken_languages?.length ? res?.spoken_languages[0]?.name : '',
+              network: { name: res?.production_companies?.length ? res?.production_companies[0].name : 'FastFlix' },
+            }
+            setShow(showObject)
           } catch (e) {
             console.log(e)
           }
         })
-      fetch(`/l0-api/shows/${params.id}/cast`)
+      fetch(`/l0-themoviedb-api/movie/${params.id}/credits`)
         .then((res) => res.json())
         .then((res) => {
           try {
-            setCast(res.slice(0, 3))
+            console.log(res)
+            setCast(res.cast.slice(0, 3))
           } catch (e) {
             console.log(e)
           }
@@ -81,12 +92,15 @@ export default function Product({ params }: ShowModalProps) {
                 </Link>
               </div>
               {show?.image?.medium && (
-                <img alt={show.name} src={RELATIVIZE_URL(show.image.medium)} className="object-cover object-center w-full h-[50vh] rounded-t" />
+                <img
+                  alt={show.name}
+                  className="object-cover object-center w-full h-[50vh] rounded-t"
+                  src={`/l0-opt?quality=30&img=https://image.tmdb.org/t/p/original${show.image.medium}`}
+                />
               )}
             </div>
             <div className="w-full flex flex-row p-5">
               <div className="w-3/5 pr-10 flex flex-col">
-                {/* {show && <h3 className="text-3xl font-bold text-gray-700">{show.name}</h3>} */}
                 {show?.summary && (
                   <p className="text-base font-light text-white leading-6 line-clamp-3" dangerouslySetInnerHTML={{ __html: show.summary }} />
                 )}
@@ -97,10 +111,8 @@ export default function Product({ params }: ShowModalProps) {
                     <span className="text-[#777]">Cast:</span>
                     <span className="px-1"></span>
                     {cast.map((i, _) => (
-                      <Fragment key={i.person?.name}>
-                        <a className="text-white hover:underline" target="_blank" href={i.person?.url}>
-                          {i.person?.name}
-                        </a>
+                      <Fragment key={i.name}>
+                        <span className="text-white hover:underline">{i.name}</span>
                         {_ !== cast.length - 1 && <span className="text-white">,&nbsp;</span>}
                       </Fragment>
                     ))}
@@ -118,27 +130,11 @@ export default function Product({ params }: ShowModalProps) {
                     ))}
                   </div>
                 )}
-                {show?.officialSite && show.officialSite.length > 0 && (
-                  <div
-                    className={[
-                      'flex flex-row flex-wrap items-center',
-                      ((show.genres && show.genres.length > 0) || (cast && cast.length > 0)) && 'mt-3',
-                    ]
-                      .filter((i) => i)
-                      .join(' ')}
-                  >
-                    <span className="text-[#777]">Official Site:</span>
-                    <span className="px-1"></span>
-                    <a className="break-all	text-white hover:underline" target="_blank" href={show.officialSite}>
-                      {show.officialSite}
-                    </a>
-                  </div>
-                )}
                 {show?.language && show.language.length > 0 && (
                   <div
                     className={[
                       'flex flex-row flex-wrap items-center',
-                      ((show.genres && show.genres.length > 0) || (cast && cast.length > 0) || show?.officialSite) && 'mt-3',
+                      ((show.genres && show.genres.length > 0) || (cast && cast.length > 0)) && 'mt-3',
                     ]
                       .filter((i) => i)
                       .join(' ')}
@@ -152,12 +148,12 @@ export default function Product({ params }: ShowModalProps) {
                   <div
                     className={[
                       'flex flex-row flex-wrap items-center',
-                      ((show.genres && show.genres.length > 0) || (cast && cast.length > 0) || show?.officialSite || show?.language) && 'mt-3',
+                      ((show.genres && show.genres.length > 0) || (cast && cast.length > 0) || show?.language) && 'mt-3',
                     ]
                       .filter((i) => i)
                       .join(' ')}
                   >
-                    <span className="text-[#777]">This show runs on:</span>
+                    <span className="text-[#777]">This movie is produced by:</span>
                     <span className="px-1"></span>
                     <span className="break-all	text-white">{show.network.name}</span>
                   </div>

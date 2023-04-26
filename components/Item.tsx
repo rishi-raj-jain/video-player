@@ -2,7 +2,6 @@
 
 import { Prefetch } from '@edgio/react'
 import { useRouter } from 'next/navigation'
-import { RELATIVIZE_URL } from '@/lib/utils'
 
 const fallbackImage =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAACmCAMAAADAp3D7AAAAA1BMVEWAgICQdD0xAAAAK0lEQVR4nO3BMQEAAADCoPVP7W8GoAAAAAAAAAAAAAAAAAAAAAAAAAAAeANRtAABpXaWUQAAAABJRU5ErkJggg=='
@@ -32,7 +31,7 @@ const Item = (itemProps: ItemProps) => {
     ? `/l0-opt?quality=30&img=https://image.tmdb.org/t/p/original${itemProps?.poster_path}`
     : fallbackImage
   return (
-    <Prefetch url={`/l0-api/shows/${id}`}>
+    <Prefetch url={`/l0-themoviedb-api/movie/${id}`}>
       <a
         href={`/show/${id}`}
         onClick={(e) => {
@@ -49,7 +48,7 @@ const Item = (itemProps: ItemProps) => {
           loading="lazy"
           className={['object-cover object-center min-h-[225px] rounded', !image && 'animate-pulse'].filter((i) => i).join(' ')}
         />
-        <Prefetch url={`/l0-api/shows/${id}/cast`}>
+        <Prefetch url={`/l0-themoviedb-api/movie/${id}/credits`}>
           {name ? (
             <h3 className="mt-3 max-w-[150px] text-gray-300">{name}</h3>
           ) : (
