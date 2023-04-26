@@ -94,7 +94,7 @@ export default function Product({ params }: ShowModalProps) {
                 <img
                   alt={show.name}
                   className="object-cover object-center w-full h-[50vh] rounded-t"
-                  src={`/l0-opt?quality=30&img=https://image.tmdb.org/t/p/original${show.image.medium}`}
+                  src={`https://opt.moovweb.net?quality=30&img=https://image.tmdb.org/t/p/original${show.image.medium}`}
                 />
               )}
             </div>

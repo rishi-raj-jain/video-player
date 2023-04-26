@@ -13,12 +13,6 @@ const Navbar = () => {
   const { data: session } = useSession()
   const [status, setStatus] = useState(false)
   useEffect(() => {
-    const callbackUrl = searchParams?.get('callbackUrl')
-    if (callbackUrl?.length) {
-      router.replace(callbackUrl)
-    }
-  }, [searchParams])
-  useEffect(() => {
     fetch('/api/session', {
       method: 'POST',
     })
@@ -32,14 +26,20 @@ const Navbar = () => {
       if (!session?.user?.email?.length) {
         if (pathname && pathname !== '/login' && pathname.startsWith('/play/')) {
           router.replace('/login')
+          return
         }
       } else {
         if (pathname === '/login') {
           router.replace('/')
+          return
         }
       }
     }
-  }, [status, session, pathname])
+    const callbackUrl = searchParams?.get('callbackUrl')
+    if (callbackUrl?.length) {
+      router.push(callbackUrl)
+    }
+  }, [status, session, pathname, searchParams])
   return (
     <div className="w-full mt-5 flex flex-row items-center justify-between">
       <Link className="flex flex-row gap-x-2 ml-5 md:ml-10 items-center" href="/">
