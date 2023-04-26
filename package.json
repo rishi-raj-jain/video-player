@@ -1,0 +1,51 @@
+{
+  "name": "video-player",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "edgio:dev": "edgio dev",
+    "edgio:build": "edgio build",
+    "edgio:deploy": "edgio deploy",
+    "fmt": "prettier --write '**/*' --ignore-unknown"
+  },
+  "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.0.3",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.33",
+    "@types/react-dom": "18.0.11",
+    "autoprefixer": "10.4.14",
+    "class-variance-authority": "^0.5.1",
+    "clsx": "^1.2.1",
+    "lucide-react": "^0.137.0",
+    "next": "13.3.1-canary.3",
+    "next-auth": "^4.22.1",
+    "postcss": "8.4.21",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwind-merge": "^1.12.0",
+    "tailwindcss": "3.3.1",
+    "tailwindcss-animate": "^1.0.5",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@edgio/cli": "^6.1.4",
+    "@edgio/core": "^6.1.4",
+    "@edgio/devtools": "^6.1.4",
+    "@edgio/next": "^6.1.4",
+    "@edgio/prefetch": "^6.1.4",
+    "@edgio/react": "^6.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.4",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "globby": "^13.1.4",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "node-fetch": "^3.3.1",
+    "prettier": "^2.8.7"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 150
+  }
+}
