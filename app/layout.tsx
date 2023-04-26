@@ -20,31 +20,31 @@ export async function generateMetadata({}): Promise<Metadata> {
   if (url?.endsWith('/')) {
     url = url.substring(0, url.length - 1)
   }
-  const path = headersList.get('ott-pathname') ?? headersList.get('next-url')
-  if (path) url += path
+  const pathname = headersList.get('ott-pathname') ?? headersList.get('next-url') ?? '/'
   return {
-    title: 'Home',
-    description: 'Welcome to Next.js',
+    icons: [`${url}/logo.png`],
+    title: 'FastFlix - A delightful OTT experience',
+    description: 'An OTT like experience made faster with dynamic edge only caching and client side prefetching.',
     twitter: {
-      title: 'Home',
+      title: 'FastFlix - A delightful OTT experience',
       creator: '@rishi_raj_jain_',
       card: 'summary_large_image',
-      description: 'Welcome to Next.js',
+      description: 'An OTT like experience made faster with dynamic edge only caching and client side prefetching.',
       images: {
-        url: 'https://rishi.app/static/favicon-image.jpg',
-        alt: 'Rishi',
+        url: `${url}/symbol.png`,
+        alt: 'FastFlix',
       },
     },
     openGraph: {
-      url,
-      title: 'Home',
-      description: 'Welcome to Next.js',
-      siteName: 'Next.js',
+      url: url + pathname,
+      title: 'FastFlix - A delightful OTT experience',
+      description: 'An OTT like experience made faster with dynamic edge only caching and client side prefetching.',
+      siteName: 'FastFlix',
       locale: 'en-US',
       type: 'website',
       images: {
-        url: 'https://rishi.app/static/favicon-image.jpg',
-        alt: 'Rishi',
+        url: `${url}/symbol.png`,
+        alt: 'FastFlix',
       },
     },
   }
