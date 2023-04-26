@@ -79,7 +79,7 @@ export default function Product({ params }: ShowModalProps) {
     <ProductDialog open={open}>
       <ProductDialogContent>
         <ProductDialogHeader>
-          <ProductDialogDescription className="bg-[#181818] rounded-b flex justify-center flex-col rounded">
+          <ProductDialogDescription className="animate-fadeIn bg-[#181818] rounded-b flex justify-center flex-col rounded">
             <div className="w-full relative">
               <div className="flex flex-row items-center absolute pb-5 pl-5 bottom-0 left-0">
                 <Link
