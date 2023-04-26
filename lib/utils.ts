@@ -5,12 +5,6 @@ export function CLSX(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function RELATIVIZE_URL(str?: string | undefined) {
-  if (str) {
-    return str.replace('https://static.tvmaze.com', '/l0-opt?quality=30&img=https://static.tvmaze.com')
-  }
-}
-
 export function GET_ORIGIN(hostURL?: string | null) {
   let origin
   if (hostURL) {

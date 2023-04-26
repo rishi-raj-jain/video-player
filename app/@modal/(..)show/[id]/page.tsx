@@ -23,7 +23,6 @@ class ShowModalProps {
 }
 
 import Link from 'next/link'
-import { RELATIVIZE_URL } from '@/lib/utils'
 import { X, TriangleIcon } from 'lucide-react'
 import { Fragment, useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
