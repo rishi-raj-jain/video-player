@@ -14,7 +14,7 @@ const Navbar = () => {
   const [status, setStatus] = useState(false)
   useEffect(() => {
     const callbackUrl = searchParams?.get('callbackUrl')
-    if (callbackUrl) {
+    if (callbackUrl?.length) {
       router.replace(callbackUrl)
     }
   }, [searchParams])
