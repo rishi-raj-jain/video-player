@@ -36,19 +36,19 @@ You can deploy your own hosted version of the OTT-like experience using the butt
 
 ### Frameworks
 
-- [Next 13](https://nextjs.org)
+- [Next 13](https://nextjs.org) - Framework of choice by default
 
 ### Hooks and Utilities
 
-- [TVmaze](https://www.tvmaze.com)
+- [TVmaze](https://www.tvmaze.com) - Upstream API
 
 ### UI
 
-- [TailwindCSS](https://tailwindcss.com)
+- [TailwindCSS](https://tailwindcss.com) - Styling
 
 ### Platform
 
-- [Edgio](https://edg.io)
+- [Edgio](https://edg.io) - Hosting
 
 ### Code Quality
 
