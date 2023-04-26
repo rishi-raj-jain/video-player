@@ -15,13 +15,17 @@ export default function Shows({ url, data }: ShowsProps) {
       fetch(url)
         .then((res) => res.json())
         .then((res) => {
-          setShows(res)
+          if (res && res?.results) {
+            setShows(res.results)
+          } else if (res && res?.length > 0) {
+            setShows(res)
+          }
         })
   }, [])
   return (
     <div className="overflow-x-auto flex flex-row items-stretch mt-5 gap-3">
       {(data ?? shows).map((item, index) => (
-        <Item key={index} {...item['show']} />
+        <Item key={index} {...(item?.show ? item['show'] : item)} />
       ))}
     </div>
   )

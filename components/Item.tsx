@@ -7,30 +7,47 @@ import { RELATIVIZE_URL } from '@/lib/utils'
 const fallbackImage =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAACmCAMAAADAp3D7AAAAA1BMVEWAgICQdD0xAAAAK0lEQVR4nO3BMQEAAADCoPVP7W8GoAAAAAAAAAAAAAAAAAAAAAAAAAAAeANRtAABpXaWUQAAAABJRU5ErkJggg=='
 
-class ItemProps {
-  name?: string | undefined
-  id?: string | number | undefined
+interface TVMazeProps {
+  name?: string
+  id?: string | number
   image?: { medium?: string; original?: string }
 }
 
-const Item = ({ id = 1, name, image }: ItemProps) => {
+interface TMDBProps {
+  title?: string
+  id?: string | number
+  poster_path?: string
+  original_title?: string
+}
+
+interface ItemProps extends TMDBProps, TVMazeProps {}
+
+const Item = (itemProps: ItemProps) => {
   const router = useRouter()
+  const id = itemProps?.id ?? 1
+  const name = itemProps?.name ?? itemProps?.original_title ?? itemProps?.title ?? 'Placeholder'
+  const image = itemProps?.image
+    ? itemProps?.image?.medium ?? itemProps?.image?.original
+    : itemProps?.poster_path
+    ? `/l0-opt?quality=30&img=https://image.tmdb.org/t/p/original${itemProps?.poster_path}`
+    : fallbackImage
   return (
     <Prefetch url={`/l0-api/shows/${id}`}>
       <a
+        href={`/show/${id}`}
         onClick={(e) => {
           e.preventDefault()
           router.push(`/show/${id}`)
         }}
-        href={`/show/${id}`}
         className="flex flex-col min-w-[150px]"
       >
         <img
-          width={150}
-          height={210.71}
-          alt={name ?? ''}
-          className={[!image && 'animate-pulse', 'rounded'].filter((i) => i).join(' ')}
-          src={RELATIVIZE_URL(image?.medium ?? image?.original ?? fallbackImage)}
+          alt={name}
+          src={image}
+          width="150px"
+          height="225px"
+          loading="lazy"
+          className={['object-cover object-center min-h-[225px] rounded', !image && 'animate-pulse'].filter((i) => i).join(' ')}
         />
         <Prefetch url={`/l0-api/shows/${id}/cast`}>
           {name ? (

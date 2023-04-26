@@ -12,43 +12,15 @@ module.exports = {
       domainOrIp: 'opt.moovweb.net',
       disableCheckCert: true,
     },
+    api_themoviedb: {
+      hostHeader: 'api.themoviedb.org',
+      domainOrIp: 'api.themoviedb.org',
+      disableCheckCert: true,
+    },
+    image_themoviedb: {
+      hostHeader: 'image.tmdb.org',
+      domainOrIp: 'image.tmdb.org',
+      disableCheckCert: true,
+    },
   },
-  // origins: [
-  //   {
-  //     name: 'api',
-  //     override_host_header: 'api.tvmaze.com',
-  //     tls_verify: {
-  //       sni_hint_and_strict_san_check: 'api.tvmaze.com',
-  //       use_sni: true,
-  //     },
-  //     hosts: [
-  //       {
-  //         location: [
-  //           {
-  //             hostname: 'api.tvmaze.com',
-  //           },
-  //         ],
-  //         scheme: 'match',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     name: 'image',
-  //     override_host_header: 'opt.moovweb.net',
-  //     tls_verify: {
-  //       sni_hint_and_strict_san_check: 'opt.moovweb.net',
-  //       use_sni: true,
-  //     },
-  //     hosts: [
-  //       {
-  //         location: [
-  //           {
-  //             hostname: 'opt.moovweb.net',
-  //           },
-  //         ],
-  //         scheme: 'match',
-  //       },
-  //     ],
-  //   },
-  // ],
 }

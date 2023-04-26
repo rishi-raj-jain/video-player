@@ -37,6 +37,7 @@
     "@edgio/react": "^6.1.4",
     "@radix-ui/react-dropdown-menu": "^2.0.4",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "dotenv": "^16.0.3",
     "globby": "^13.1.4",
     "imagemin": "^8.0.1",
     "imagemin-jpegtran": "^7.0.0",
