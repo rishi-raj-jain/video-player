@@ -25,7 +25,7 @@ interface ItemProps extends TMDBProps, TVMazeProps {}
 
 const Item = (itemProps: ItemProps) => {
   const router = useRouter()
-  const id = itemProps?.id ?? 1
+  const id = itemProps?.id ?? -1
   const name = itemProps?.name ?? itemProps?.original_title ?? itemProps?.title ?? 'Placeholder'
   const image = itemProps?.image
     ? itemProps?.image?.medium ?? itemProps?.image?.original
@@ -38,8 +38,10 @@ const Item = (itemProps: ItemProps) => {
     if (isVisible) {
       // router.prefetch(`/show/${id}`)
       // wanna cache this in the browser as well
-      prefetch(`/l0-themoviedb-api/movie/${id}`, 'fetch', { includeCacheMisses: true })
-      prefetch(`/l0-themoviedb-api/movie/${id}/credits`, 'fetch', { includeCacheMisses: true })
+      if (id !== -1) {
+        prefetch(`/l0-themoviedb-api/movie/${id}`, 'fetch', { includeCacheMisses: true })
+        prefetch(`/l0-themoviedb-api/movie/${id}/credits`, 'fetch', { includeCacheMisses: true })
+      }
     }
   }, [isVisible])
   return (
