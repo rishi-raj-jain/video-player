@@ -30,7 +30,7 @@ const Item = (itemProps: ItemProps) => {
   const image = itemProps?.image
     ? itemProps?.image?.medium ?? itemProps?.image?.original
     : itemProps?.poster_path
-    ? `https://opt.moovweb.net?quality=30&img=https://image.tmdb.org/t/p/original${itemProps?.poster_path}`
+    ? `/l0-opt?quality=10&img=https://image.tmdb.org/t/p/original${itemProps?.poster_path}`
     : fallbackImage
   const ref = useRef<HTMLAnchorElement>(null)
   const isVisible = useOnScreen(ref)

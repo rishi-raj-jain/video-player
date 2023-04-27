@@ -47,6 +47,18 @@ router.get('/l0-themoviedb-api/:path*', ({ proxy, cache, removeUpstreamResponseH
   })
 })
 
+router.get('/l0-opt', ({ proxy, cache, removeUpstreamResponseHeader }) => {
+  removeUpstreamResponseHeader('set-cookie')
+  removeUpstreamResponseHeader('cache-control')
+  cache({
+    edge: {
+      maxAgeSeconds: 60 * 60 * 24 * 365,
+    },
+    browser: false,
+  })
+  proxy('image', { path: '/' })
+})
+
 router.get('/_next/image', ({ cache, renderWithApp, removeUpstreamResponseHeader }) => {
   removeUpstreamResponseHeader('set-cookie')
   removeUpstreamResponseHeader('cache-control')

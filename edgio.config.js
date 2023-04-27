@@ -12,5 +12,10 @@ module.exports = {
       domainOrIp: 'api.themoviedb.org',
       disableCheckCert: true,
     },
+    image: {
+      hostHeader: 'opt.moovweb.net',
+      domainOrIp: 'opt.moovweb.net',
+      disableCheckCert: true,
+    },
   },
 }
