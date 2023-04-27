@@ -3,12 +3,16 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 
-export default function ShowPage({ params }: { params: { id: string | number } }) {
+export default function ShowPage() {
   const router = useRouter()
+  const params = useParams()
   useEffect(() => {
-    router.push(`/show/${params.id}`)
+    router.push(`/`)
+    if (params?.id) {
+      router.push(`/show/${params.id}`)
+    }
   }, [])
   return <></>
 }
