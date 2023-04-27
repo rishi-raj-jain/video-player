@@ -12,10 +12,5 @@ module.exports = {
       domainOrIp: 'api.themoviedb.org',
       disableCheckCert: true,
     },
-    image_themoviedb: {
-      hostHeader: 'image.tmdb.org',
-      domainOrIp: 'image.tmdb.org',
-      disableCheckCert: true,
-    },
   },
 }
