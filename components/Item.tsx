@@ -36,8 +36,6 @@ const Item = (itemProps: ItemProps) => {
   const isVisible = useOnScreen(ref)
   useEffect(() => {
     if (isVisible) {
-      // router.prefetch(`/show/${id}`)
-      // wanna cache this in the browser as well
       if (id !== -1) {
         prefetch(`/l0-themoviedb-api/movie/${id}`, 'fetch', { includeCacheMisses: true })
         prefetch(`/l0-themoviedb-api/movie/${id}/credits`, 'fetch', { includeCacheMisses: true })
