@@ -22,7 +22,9 @@ router.get('/l0-api/:path*', ({ proxy, cache, removeUpstreamResponseHeader }) =>
       maxAgeSeconds: 60 * 60 * 24,
       staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
     },
-    browser: false,
+    browser: {
+      serviceWorkerSeconds: 60,
+    },
   })
   proxy('api', { path: '/:path*' })
 })
@@ -35,7 +37,9 @@ router.get('/l0-themoviedb-api/:path*', ({ proxy, cache, removeUpstreamResponseH
       maxAgeSeconds: 60 * 60 * 24,
       staleWhileRevalidateSeconds: 60 * 60 * 24 * 365,
     },
-    browser: false,
+    browser: {
+      serviceWorkerSeconds: 60,
+    },
   })
   proxy('api_themoviedb', {
     path: '/3/:path*',
@@ -54,7 +58,9 @@ router.get('/l0-opt', ({ proxy, cache, removeUpstreamResponseHeader }) => {
     edge: {
       maxAgeSeconds: 60 * 60 * 24 * 365,
     },
-    browser: false,
+    browser: {
+      serviceWorkerSeconds: 60,
+    },
   })
   proxy('image', { path: '/' })
 })
@@ -65,6 +71,9 @@ router.get('/_next/image', ({ cache, renderWithApp, removeUpstreamResponseHeader
   cache({
     edge: {
       maxAgeSeconds: 60 * 60 * 24 * 365,
+    },
+    browser: {
+      serviceWorkerSeconds: 60,
     },
     key: new CustomCacheKey().excludeAllQueryParametersExcept('url', 'w', 'q'),
   })
