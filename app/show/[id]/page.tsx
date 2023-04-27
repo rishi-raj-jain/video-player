@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 export default function ShowPage({ params }: { params: { id: string | number } }) {
   const router = useRouter()
   useEffect(() => {
-    router.push('/')
     router.push(`/show/${params.id}`)
   }, [])
   return <></>
