@@ -9,15 +9,15 @@ export default function ServiceWorker() {
     install().then(() => {
       document.querySelectorAll('[href*=".css"]').forEach((i) => {
         // @ts-ignore
-        prefetch(i.href)
+        prefetch(i.href, 'fetch', { includeCacheMisses: true })
       })
       document.querySelectorAll('[src*=".png"]').forEach((i) => {
         // @ts-ignore
-        prefetch(i.src)
+        prefetch(i.src, 'fetch', { includeCacheMisses: true })
       })
       document.querySelectorAll('[src*=".jpg"]').forEach((i) => {
         // @ts-ignore
-        prefetch(i.src)
+        prefetch(i.src, 'fetch', { includeCacheMisses: true })
       })
     })
   })
